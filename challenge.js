@@ -1,34 +1,28 @@
 const counter = document.getElementById('counter');
-
-likesList = {}
-
-// runCounter = (function () {
-//   setInterval(function() {
-//     counter.innerText++;
-//   }, 1000 );
-// })()
-
-// counter.addEventListener('load', runCounter)
-
-runCounter = setInterval( increment, 1000 )
-
 const minusBtn = document.getElementById('-');
 const plusBtn = document.getElementById('+');
+const likesBtn = document.getElementById('<3')
+const submitBtn = document.getElementById('submit')
+const pauseBtn = document.getElementById('pause')
+runCounter = setInterval( increment, 1000 )
+likesList = {}
 
+pauseBtn.addEventListener('click', disable)
+submitBtn.addEventListener('click', submitComment)
 minusBtn.addEventListener('click', decrement)
 plusBtn.addEventListener('click', increment)
+likesBtn.addEventListener('click', addLikes)
+
 
 function decrement() {
   counter.innerText--
 }
 
+
 function increment() {
   counter.innerText++
 }
 
-const likesBtn = document.getElementById('<3')
-
-likesBtn.addEventListener('click', addLikes)
 
 function addLikes() {
   currentCount = counter.innerText
@@ -54,11 +48,6 @@ function addLikes() {
   }
 }
 
-const pauseBtn = document.getElementById('pause')
-pauseBtn.addEventListener('click', disable)
-
-const submitBtn = document.getElementById('submit')
-submitBtn.addEventListener('click', submitComment)
 
 function disable() {
   if (pauseBtn.innerText === 'resume') {
@@ -79,6 +68,7 @@ function disable() {
   }
 }
 
+
 function submitComment() {
   event.preventDefault()
   const commentUl = document.getElementById('comments')
@@ -87,5 +77,4 @@ function submitComment() {
   const userComment = document.getElementById('usercomment')
   li.innerText = userComment.value
   commentUl.append(li)
-
 }
